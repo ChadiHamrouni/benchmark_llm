@@ -1,7 +1,7 @@
 # LLM Benchmark Lab – Setup
 
 This lab uses **local LLMs with Ollama**.  
-Before running the benchmark script, you **must** install Ollama, create a Python virtual environment using `virtualenv`, install dependencies, and pull the required models.
+Before running the `app.py` script, you **must** install Ollama, create a Python virtual environment using `virtualenv`, install dependencies, and pull the required models.
 
 ---
 
@@ -53,7 +53,7 @@ You should now see `(venv)` in your terminal.
 
 ## 3. Install Python Dependencies
 
-Once the virtual environment is active, install all required libraries:
+Once the virtual environment is active, install all dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -64,20 +64,20 @@ Your `requirements.txt` must include at least:
 ```
 pandas
 ollama
+streamlit
 ```
 
-Add other dependencies if needed.
+Add others if your project requires them.
 
 ---
 
 ## 4. Pull the Required Models in Ollama
 
-The benchmark script uses these models:
+The app uses the following models:
 
 ```python
 MODEL_NAMES = [
-    # "qwen3:4b",
-    "gemma3:latest",  # 4B
+    "gemma3:latest",
     "cogito:3b",
 ]
 ```
@@ -87,25 +87,23 @@ Download them with:
 ```bash
 ollama pull gemma3:latest
 ollama pull cogito:3b
-# optional if you later enable it:
-# ollama pull qwen3:4b
 ```
 
 ---
 
-## 5. Run the Benchmark Script
+## 5. Run the Application
 
-When the virtual environment is active and models are installed, run:
+With the virtual environment active, start the Streamlit app:
 
 ```bash
-python benchmark_ollama_models.py
+streamlit run app.py
 ```
 
 This will:
 
-- Call each model with the same questions and sensor data  
-- Measure how long each model takes  
-- Count how many words each model actually generated  
-- Save the results into a CSV file for inspection  
+- Read sensor data
+- Send it to the selected local LLMs
+- Measure timing and output word counts
+- Display results through the Streamlit interface
 
 You're ready to start the lab. 🚀
