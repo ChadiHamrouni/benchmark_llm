@@ -1,7 +1,7 @@
 # LLM Benchmark Lab – Setup
 
 This lab uses **local LLMs with Ollama**.  
-Before running the benchmark script, you **must** install Ollama and pull the required models.
+Before running the benchmark script, you **must** install Ollama, create a Python virtual environment using `virtualenv`, install dependencies, and pull the required models.
 
 ---
 
@@ -17,13 +17,62 @@ After installing, start the Ollama server in a terminal:
 ollama serve
 ```
 
-Leave this running while you do the lab.
+Leave this running while doing the lab.
 
 ---
 
-## 2. Pull the Required Models
+## 2. Create and Activate a Virtual Environment (using virtualenv)
 
-The Python script uses the following models:
+### Install virtualenv (if not installed):
+
+```bash
+pip install virtualenv
+```
+
+### Create the environment:
+
+```bash
+virtualenv venv
+```
+
+### Activate it:
+
+**Windows:**
+```bash
+venv\Scripts\activate
+```
+
+**macOS/Linux:**
+```bash
+source venv/bin/activate
+```
+
+You should now see `(venv)` in your terminal.
+
+---
+
+## 3. Install Python Dependencies
+
+Once the virtual environment is active, install all required libraries:
+
+```bash
+pip install -r requirements.txt
+```
+
+Your `requirements.txt` must include at least:
+
+```
+pandas
+ollama
+```
+
+Add other dependencies if needed.
+
+---
+
+## 4. Pull the Required Models in Ollama
+
+The benchmark script uses these models:
 
 ```python
 MODEL_NAMES = [
@@ -33,26 +82,20 @@ MODEL_NAMES = [
 ]
 ```
 
-You must download them first:
+Download them with:
 
 ```bash
 ollama pull gemma3:latest
 ollama pull cogito:3b
-# optional if you uncomment it later:
+# optional if you later enable it:
 # ollama pull qwen3:4b
 ```
 
 ---
 
-## 3. Run the Benchmark Script
+## 5. Run the Benchmark Script
 
-Make sure you have Python and the required libraries (for example: `pandas`, `ollama`):
-
-```bash
-pip install pandas ollama
-```
-
-Then run the benchmark script from the folder where it is saved:
+When the virtual environment is active and models are installed, run:
 
 ```bash
 python benchmark_ollama_models.py
@@ -63,4 +106,6 @@ This will:
 - Call each model with the same questions and sensor data  
 - Measure how long each model takes  
 - Count how many words each model actually generated  
-- Save the results to a CSV file for you to inspect.
+- Save the results into a CSV file for inspection  
+
+You're ready to start the lab. 🚀
